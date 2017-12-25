@@ -5,7 +5,7 @@ import datetime
 
 class Post(Base):
     __tablename__ = 'posts'
-    author_pk = Column(Integer, ForeignKey('users.pk', nullable=True))
+    author_pk = Column(Integer, ForeignKey('users.pk'), nullable=False)
     title = Column(String(128), nullable=False)
     text = Column(String)
 

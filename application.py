@@ -21,21 +21,11 @@ def base_app():
     ''' Config database and tools'''
     app.config.update(default_settings)
     app.config.from_pyfile('config/config_dev.py')
-    convention = {
-        "ix": 'ix_%(column_0_label)s',
-        "uq": "uq_%(table_name)s_%(column_0_name)s",
-        "ck": "ck_%(table_name)s_%(constraint_name)s",
-        "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
-        "pk": "pk_%(table_name)s"
-    }
-    metadata = MetaData(naming_convention=convention)
-    db = SQLAlchemy(app, metadata=metadata)
 
 
     # PostgreSQL configuration
     sqlalchemy_settings_key = 'SQLALCHEMY_DATABASE_SETTINGS'
     sqlalchemy_settings = app.config.get(sqlalchemy_settings_key)
-    print sqlalchemy_settings
     app.config.update({
         'SQLALCHEMY_DATABASE_URI':
             '{protocol}://{user_name}:{password}@{host}:{port}/{db_name}'.format(
@@ -47,6 +37,16 @@ def base_app():
                 db_name=sqlalchemy_settings.get('DB_NAME')
             )
     })
+
+    convention = {
+        "ix": 'ix_%(column_0_label)s',
+        "uq": "uq_%(table_name)s_%(column_0_name)s",
+        "ck": "ck_%(table_name)s_%(constraint_name)s",
+        "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
+        "pk": "pk_%(table_name)s"
+    }
+    metadata = MetaData(naming_convention=convention)
+    db = SQLAlchemy(app, metadata=metadata)
 
     return app, db
 

@@ -1,0 +1,12 @@
+SQLALCHEMY_DATABASE_SETTINGS = {
+    'PROTOCOL': 'postgres',
+    'HOST': 'localhost',
+    'PORT': '5430',
+    'DB_NAME': 'dev_db',
+    'USER_NAME': 'dev_user',
+    'PASSWORD': 'dev_password'
+}
+SERVER_NAME = 'lvh.me:5005'
+DEBUG = True
+TESTING = False
+PORT = 5005

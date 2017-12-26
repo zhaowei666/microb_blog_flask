@@ -6,7 +6,7 @@ SQLALCHEMY_DATABASE_SETTINGS = {
     'USER_NAME': 'dev_user',
     'PASSWORD': 'dev_password'
 }
-SERVER_NAME = 'lvh.me:5005'
+SERVER_NAME = 'lvh.me:5000'
 DEBUG = True
 TESTING = False
-PORT = 5005
+PORT = 5000

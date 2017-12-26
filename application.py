@@ -1,4 +1,4 @@
-from flask import Flask, g, Response, request
+from flask import Flask, g, request
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
 from resources.blog import blog_bp
@@ -48,13 +48,16 @@ def base_app():
     metadata = MetaData(naming_convention=convention)
     db = SQLAlchemy(app, metadata=metadata)
 
+    @app.before_request
+    def before_request():
+        g.session = db.session
+
     return app, db
 
 
 def create_app():
     app, db = base_app()
     ''' add subdomain '''
-
     app.register_blueprint(blog_bp)
 
     return app, db
